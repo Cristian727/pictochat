@@ -64,10 +64,17 @@ socket.on('init chat', (mensajes) => {
 })
 
 socket.on('chat message', (msg) => {
- const item = document.createElement('li');
- item.textContent = msg;
- messages.appendChild(item);
- window.scrollTo(0, document.body.scrollHeight);
+  const item = document.createElement('a');
+  if(esUrl(msg)){
+    item.href = msg
+    item.textContent = msg;
+  }
+  else{
+    item.textContent = msg;
+  }
+  messages.appendChild(item);
+  window.scrollTo(0, document.body.scrollHeight);
 });
 
- 
+ function esURL(string) {
+   return string.startsWith("http://");
